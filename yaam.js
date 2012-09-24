@@ -28,7 +28,6 @@ module.exports = {
 			console.error(new Error("YAAM.read not supplied with filename"));
 			return null;
 		}
-		// God dammit, node, why can't I have asyncronys things
 		fs.readFile(filename, function(err, data) {
 			var ndata;
 			data = data.toString('utf8').split("\n");
