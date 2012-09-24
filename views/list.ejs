@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WebYAAM <% if(title) { %>- <%= title %> <% } %></title>
+		<link href="/assets/css/bootstrap.css" rel="stylesheet" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<style>
+					div.container > div.navbar {
+						padding-top: 6px;
+					}
+				</style>
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<a class="brand" href="#">YYAM</a>
+						<ul class="nav">
+							<li><a href="/">Home</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<h1>Database: <%= dbname %></h1>
+			<div class="row-fluid">
+				<div class="span3" id="menu">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+							<li class="nav-header">Anime</li>
+							<% for(var i = 0; i < list.length; i++) { %>
+								<li><a href="/view/<%= list[i] %>"><%= list[i] %></a></li>
+							<% } %>
+						</ul>
+					</div>
+				</div>
+				<div class="span9" id="content">
+					<div class="hero-unit">
+						<h1>Select an anime</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	</body>
+</html>

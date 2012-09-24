@@ -4,32 +4,39 @@
  *
  * Format:
  * First line is YAAM;Databasename
- * Then: Name;Genre;Status;Observations;null;MAL anime ID
+ * Then: Name;Genre;Status;LastEpisodeWatched;Observations;null;MAL anime ID
  *
- * read(filename): Reads filename, then returns the file data in an array
- * parse(data): Parses the array from YAAM.read and returns an object
+ * read(filename, callback): Reads filename, then returns the callback, with the array of data
+ * parse(data, callback): Parses the array from YAAM.read. If a callback is supplied, then it will return the callback with the object, otherwise it will return the object
  * 
- * Test cases: 
- * 	YAAM.parse(["YAAM;Test", "Steins Gate;Sci-Fi;W;null;null;null"]);
+ * Test case: 
+ *	var yaam = require('./yaam');
+ * 	yaam.read('databoose', function(rdata) {
+ *		yaam.parse(rdata, function(pdata) {
+ *			console.log(pdata);
+ *		});
+ *	});
  *
  */
 
-exports.YAAM = {
-	read: function(filename) {
+var fs = require('fs');
+
+module.exports = {
+	read: function(filename, callback) {
+		var retarr = [];
 		if(typeof filename === 'undefined' && filename === null) {
 			console.error(new Error("YAAM.read not supplied with filename"));
 			return null;
 		}
-		fs.readFile(filename, 'utf8', function(err, data) {
-			if(err || !data) {
-				console.error(new Error("YAAM.read failed to read file"));
-				return null;
-			} else {
-				return data.split('\n');
-			}
+		// God dammit, node, why can't I have asyncronys things
+		fs.readFile(filename, function(err, data) {
+			var ndata;
+			data = data.toString('utf8').split("\n");
+			data.splice(-1, 1); // XXX Not sure if this will always remove the "" property, but so far hasn't fucked up. Need more tests.
+			return callback(data);
 		});
 	},
-	parse: function(data) {
+	parse: function(data, callback) {
 		var templine, retobject = {};
 		if(typeof data === 'undefined' && data === null) {
 			console.error(new Error("YAAM.parse not supplied with data"));
@@ -47,12 +54,17 @@ exports.YAAM = {
 			}
 			retobject[templine[0]] = {
 				genre: templine[1],
-				status: ( templine[2] === "W" ? "Watched" : ( templine[2] === "Q" ? "On Queue" : ( templine[2] === "H" ? "On hold" : ( templine[2] === "N" ? "Not watching" : ( templine[2] === "C" ? "Current" : "Invalid"))))), // Oh god...
-				observations: ( templine[3] === 'null' ? null : templine[3] ),
-				image: ( templine[4] === 'null' ? null : templine[4] ),
-				mal: ( templine[5] === 'null' ? null : templine[5] )
+				status: ( templine[2] === "W" ? "Watched" : ( templine[2] === "Q" ? "On queue" : ( templine[2] === "H" ? "On hold" : ( templine[2] === "N" ? "Not watching" : ( templine[2] === "C" ? "Current" : "Invalid"))))), // Oh god...
+				episode: Number(templine[3]),
+				observations: ( templine[4] === 'null' ? null : templine[4] ),
+				image: ( templine[5] === 'null' ? null : templine[5] ),
+				mal: ( typeof templine[6] === 'undefined' ? null : templine[6] )
 			}
 		}
-		return retobject;
+		if(typeof callback === 'undefined' && callback === null) {
+			return retobject;
+		} else if(typeof callback === 'function' && callback !== null) {
+			return callback(retobject);
+		}
 	}
 };

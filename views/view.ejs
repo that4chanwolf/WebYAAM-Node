@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WebYAAM <% if(title) { %>- <%= title %> <% } %></title>
+		<link href="/assets/css/bootstrap.css" rel="stylesheet" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<style>
+					div.container > div.navbar {
+						padding-top: 6px;
+					}
+				</style>
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<a class="brand" href="#">YYAM</a>
+						<ul class="nav">
+							<li><a href="/">Home</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<h1>Database: <%= dbname %></h1>
+			<div class="row-fluid">
+				<div class="span3" id="menu">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+							<li class="nav-header">Anime</li>
+							<% for(var i = 0; i < list.length; i++) { %>
+								<li><a href="/view/<%= list[i] %>"><%= list[i] %></a></li>
+							<% } %>
+						</ul>
+					</div>
+				</div>
+				<div class="span9" id="content">
+					<div class="hero-unit">
+						<% if(selected === null) { %>
+							<h1>Select an anime</h1>
+						<% } else { %>
+							<h1><%= selected %></h1>
+							<br />
+							<% if( info.status === "Watched") { %>
+									<label>Status: <span class="label label-success">Watched</label></label>
+							<% } else if( info.status === "On queue") { %>
+									<label>Status: <span class="label">On Queue</label></label>
+							<% } else if( info.status === "On hold") { %>
+									<label>Status: <span class="label label-warning">On Hold</label></label>
+							<% } else if( info.status === "Not watching") { %>
+									<label>Status: <span class="label label-inverse">Not Watching</label></label>
+							<% } else if( info.status === "Current") {%>
+									<label>Status: <span class="label label-info">Current</label></label>
+							<% } %>
+						<% } %>
+						<label>Episode: <span class="badge"><%= info.episode%></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	</body>
+</html>
