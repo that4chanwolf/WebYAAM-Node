@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WebYAAM <% if(title) { %>- <%= title %> <% } %></title>
+		<link href="/assets/css/bootstrap.css" rel="stylesheet" />
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<style>
+					div.container > div.navbar {
+						padding-top: 6px;
+					}
+					div.dbinfo * {
+						font-size: 22.5px;
+						padding-left: 25px;
+					}
+				</style>
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<a class="brand" href="#">YYAM</a>
+						<ul class="nav">
+							<li class="active"><a href="/">Home</a></li>
+							<li><a href="/view">View</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12" id="content">
+					<div class="hero-unit">
+						<h1>WebYAAM-Node</h1>
+						<div>
+							<label>Info:</label>
+							<div class="dbinfo">
+								<label>Database name: <%= dbname %></label>
+								<label>Anime stored: <%= dbcount %></label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	</body>
+</html>
