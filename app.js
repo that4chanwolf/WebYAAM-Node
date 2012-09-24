@@ -21,6 +21,24 @@ app.configure(function(){
 
 // Front page
 app.get('/', function(req, res) {
+	var filename = ( args.indexOf('-d') !== -1 ? args[args.indexOf('-d') + 1] : null ),
+	dbname, dbcount = 0
+	YAAM.read(filename, function(rdata) {
+		YAAM.parse(rdata, function(pdata) {
+			for(var i in pdata) {
+				if( i === 'DBNAME' ) {
+					dbname = pdata[i];
+					continue;
+				}
+				dbcount++;
+			}
+			res.render('home', {
+				'title': 'View',
+				'dbname': dbname,
+				'dbcount': dbcount
+			});
+		});
+	});
 	
 });
 
