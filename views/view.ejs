@@ -18,6 +18,7 @@
 						<a class="brand" href="#">YYAM</a>
 						<ul class="nav">
 							<li><a href="/">Home</a></li>
+							<li class="active"><a href="/view">View</a></li>
 						</ul>
 					</div>
 				</div>
@@ -54,6 +55,8 @@
 							<% } %>
 						<% } %>
 						<label>Episode: <span class="badge"><%= info.episode%></label>
+						<label>Genre: <%= info.genre %></label>
+						<p class="observations"><%= escape(info.observations) %></p>
 					</div>
 				</div>
 			</div>

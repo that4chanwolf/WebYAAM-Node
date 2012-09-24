@@ -21,9 +21,10 @@ app.configure(function(){
 
 // Front page
 app.get('/', function(req, res) {
+	
 });
 
-app.get('/view/', function(req, res) {
+app.get('/view', function(req, res) {
 	var filename = ( args.indexOf('-d') !== -1 ? args[args.indexOf('-d') + 1] : null ),
 	    list     = [],
 	    dbname, info; 
