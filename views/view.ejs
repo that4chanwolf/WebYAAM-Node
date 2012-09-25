@@ -15,7 +15,7 @@
 				</style>
 				<div class="navbar-inner">
 					<div class="container-fluid">
-						<a class="brand" href="#">YYAM</a>
+						<a class="brand" href="#">YAAM</a>
 						<ul class="nav">
 							<li><a href="/">Home</a></li>
 							<li class="active"><a href="/view">View</a></li>
@@ -30,7 +30,11 @@
 						<ul class="nav nav-list">
 							<li class="nav-header">Anime</li>
 							<% for(var i = 0; i < list.length; i++) { %>
-								<li><a href="/view/<%= list[i] %>"><%= list[i] %></a></li>
+								<% if( list[i] === selected ) {%>
+									<li class="active"><a href="/view/<%= list[i] %>"><%= list[i] %></a></li>
+								<% } else { %>
+									<li><a href="/view/<%= list[i] %>"><%= list[i] %></a></li>								
+								<% } %>
 							<% } %>
 						</ul>
 					</div>

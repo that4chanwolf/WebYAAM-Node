@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 				dbcount++;
 			}
 			res.render('home', {
-				'title': 'View',
+				'title': 'Home',
 				'dbname': dbname,
 				'dbcount': dbcount
 			});
@@ -101,6 +101,24 @@ app.get('/view/:animu', function(req, res) {
 	});
 });
 
+// Add an anime page
+app.get('/add', function(req, res) {
+	res.render('manage', {
+		'title': 'Add entry',
+		'mode': 'add'
+	});
+});
+
+// Post requests
+app.post('/post', function(req, res) {
+	var file = req.files.image,
+	    name = req.body.name,
+	    status = req.body.status.charAt(0).toUpperCase(),
+	    episode = req.body.episode,
+	    observations = req.body.observations;
+	
+});
+
 // 404 page
 app.get('/*', function(req, res) {
 	res.status(404).render('404', {
@@ -108,4 +126,4 @@ app.get('/*', function(req, res) {
 	});
 });
 
-app.listen(8080);
+app.listen(8190);
