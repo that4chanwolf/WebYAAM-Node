@@ -11,7 +11,7 @@ var get = function(name) {
 }
 
 var set = function(info) {
-	var des;
+	var des, id;
 	if(typeof info === 'undefined' && info === null) {
 		console.error(new Error("Info not supplied to set()"));
 		return;
