@@ -52,10 +52,10 @@ module.exports = {
 				continue;
 			}
 			retobject[templine[0]] = {
-				genre: templine[1],
+				genre: ( templine[1] === 'null' ? "None" : templine[1] ),
 				status: ( templine[2] === "W" ? "Watched" : ( templine[2] === "Q" ? "On queue" : ( templine[2] === "H" ? "On hold" : ( templine[2] === "N" ? "Not watching" : ( templine[2] === "C" ? "Current" : "Invalid"))))), // Oh god...
-				episode: Number(templine[3]),
-				observations: ( templine[4] === 'null' ? null : templine[4] ),
+				episode: ( String(Number(templine[3])) === 'NaN' ? "Done" : Number(templine[3]) ),
+				observations: ( templine[4] === 'null' ? '' : templine[4] ),
 				image: ( templine[5] === 'null' ? null : templine[5] ),
 				mal: ( typeof templine[6] === 'undefined' ? null : templine[6] )
 			}

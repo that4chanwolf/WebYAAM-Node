@@ -1,7 +1,7 @@
 var get = function(name) {
 	var xhr = new XMLHttpRequest(),
 	    res;
-	name = escape(name.replace(/ /g, '+').toLowerCase());
+	name = unescape(name.replace(/ /g, '+').toLowerCase());
 	xhr.open("GET", "http://mal-api.com/anime/search?q=" + name, false);
 	xhr.send();
 	if(xhr.status === 200) {
