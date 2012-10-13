@@ -65,25 +65,5 @@ module.exports = {
 		} else if(typeof callback === 'function' && callback !== null) {
 			return callback(retobject);
 		}
-	},
-	add: function(filename, object, callback) {
-		if(typeof object === 'undefined' || object === null) {
-			console.error(new Error("Object not supplied"));
-			return;
-		}
-		if(typeof filename === 'undefined' || filename === null) {
-			console.error(new Error("Filename not supplied"));
-			return;
-		}
-		var array = [
-			object['name'],
-			object['genre'] || 'Unknown',
-			object['status'] || 'N',
-			object['episode'],
-			object['observations'],
-			object['image'] || 'null',
-			object['mal'] || 'null'
-		];
-		fs.appendFile(filename, array.join(";"), callback);
 	}
 };
