@@ -1,5 +1,5 @@
 var express = require('express'),
-    app     = express(),
+     app     = express(),
     fs      = require('fs'),
     args    = process.argv,
     YAAM    = require('./yaam');
@@ -78,7 +78,7 @@ app.get('/view/:animu', function(req, res) {
 					dbname = pdata[i];
 					continue;
 				}
-				if( req.params.animu === i ) {
+				if( unescape(req.params.animu) === unescape(i) ) {
 					info = {
 						genre: pdata[i].genre,
 						status: pdata[i].status,
