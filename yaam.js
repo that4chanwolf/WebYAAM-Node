@@ -51,7 +51,7 @@ module.exports = {
 				retobject["DBNAME"] = templine[1];
 				continue;
 			}
-			retobject[templine[0]] = {
+			retobject[templine[0].replace(String.fromCharCode(9), ';')] = {
 				genre: ( templine[1] === 'null' ? "None" : templine[1] ),
 				status: ( templine[2] === "W" ? "Watched" : ( templine[2] === "Q" ? "On queue" : ( templine[2] === "H" ? "On hold" : ( templine[2] === "N" ? "Not watching" : ( templine[2] === "C" ? "Current" : "Invalid"))))), // Oh god...
 				episode: ( String(Number(templine[3])) === 'NaN' ? "Done" : Number(templine[3]) ),
